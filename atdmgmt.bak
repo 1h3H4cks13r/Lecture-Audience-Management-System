@@ -4,7 +4,7 @@
 #include<stdlib.h>
 using namespace std;
 
-//int count=0;
+int count=0;
 
 class stud
 {
@@ -15,7 +15,7 @@ public:
 	void attend();
 	void dattend();
 	void disp();
-} s;
+} s[50];
 
 void stud::add()
 {
@@ -50,88 +50,36 @@ void stud::disp()
 
 void entry(int n)
 {
+    int i;
     char ch='y';
-
-ofstream file_obj;
-if(!n){
-cout<<n;
-file_obj.open("Input.txt", ios::out);
-}else
-file_obj.open("Input.txt", ios::app);
-
-    while(ch!='n')
+    for(i=n;i<50,ch!='n';i++)
     {
-        s.add();
-file_obj.write((char*)&s, sizeof(s));
+        s[i].add();
         cout<<" Do you want to enter another student? (y/n) : ";
         ch=getch();
         cout<<ch<<endl;
     }
-
+    count = i;
 }
 
 void markat()
 {
-
-ifstream file_obj;
-file_obj.open("Input.txt", ios::in);
-
-ofstream file_obj2;
-file_obj2.open("Input2.txt", ios::out);
-file_obj.read((char*)&s, sizeof(s));
-while (!file_obj.eof())
-{
-    s.attend();
-file_obj2.write((char*)&s, sizeof(s));
-file_obj.read((char*)&s, sizeof(s));
-}
-
-file_obj.close();
-file_obj2.close();
-
-file_obj.open("Input2.txt", ios::in);
-file_obj2.open("Input.txt", ios::out);
-
-string str;
-
-file_obj >> str;
-file_obj2 << str;
-
-/*while(!file_obj.eof())
-{
-file_obj.read((char*)&s, sizeof(s));
-file_obj2.write((char*)&s, sizeof(s));
-s.dattend();getch();
-}*/
-
+    for(int i=0;i<count;i++)
+    {
+        s[i].attend();
+    }
 }
 
 void dispat()
 {
-
-ifstream file_obj;
-file_obj.open("Input.txt", ios::in);
-file_obj.read((char*)&s, sizeof(s));
-while (!file_obj.eof())
-{
-    s.dattend();
-file_obj.read((char*)&s, sizeof(s));
-}
-
+    for(int i=0;i<count;i++)
+    s[i].dattend();
 }
 
 void dispdetails()
 {
-
-ifstream file_obj;
-file_obj.open("Input.txt", ios::in);
-file_obj.read((char*)&s, sizeof(s));
-while (!file_obj.eof())
-{
-    s.disp();
-file_obj.read((char*)&s, sizeof(s));
-}
-
+    for(int i=0;i<count;i++)
+    s[i].disp();
 }
 
 void entry_menu()
@@ -148,7 +96,7 @@ void entry_menu()
         break;
 
         case 2:
-        entry(1);
+        entry(count);
         break;
         
         case 3: break;

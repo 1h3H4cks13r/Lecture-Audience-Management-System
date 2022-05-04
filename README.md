@@ -1,1 +1,1 @@
-# Simple-Attendance-System
+# Lecture-Audience-Management-System
